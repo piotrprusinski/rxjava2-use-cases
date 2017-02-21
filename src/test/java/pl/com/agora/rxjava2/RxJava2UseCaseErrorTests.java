@@ -1,10 +1,9 @@
 package pl.com.agora.rxjava2;
 
-import java.util.concurrent.Callable;
-
+import io.reactivex.Observable;
 import org.junit.Test;
 
-import io.reactivex.Observable;
+import java.util.concurrent.Callable;
 
 public class RxJava2UseCaseErrorTests {
 
@@ -27,12 +26,12 @@ public class RxJava2UseCaseErrorTests {
 
 	@Test
 	public void throwExceptionAndStop() throws Exception {
-		Observable<String> a = Observable.create((emiter) -> {
-			emiter.onNext("1");
-			emiter.onNext("2");
-			emiter.onNext("3");
-			emiter.onError(new NullPointerException());
-			emiter.onNext("4");
+		Observable<String> a = Observable.create((emitter) -> {
+			emitter.onNext("1");
+			emitter.onNext("2");
+			emitter.onNext("3");
+			emitter.onError(new NullPointerException());
+			emitter.onNext("4");
 		});
 
 		a.subscribe(this::log); // nie pojawi się 4
@@ -40,12 +39,12 @@ public class RxJava2UseCaseErrorTests {
 
 	@Test
 	public void throwExceptionAndStop2() throws Exception {
-		Observable<String> a = Observable.create((emiter) -> {
-			emiter.onNext("1");
-			emiter.onNext("2");
-			emiter.onNext("3");
-			emiter.onError(new NullPointerException());
-			emiter.onNext("4");
+		Observable<String> a = Observable.create((emitter) -> {
+			emitter.onNext("1");
+			emitter.onNext("2");
+			emitter.onNext("3");
+			emitter.onError(new NullPointerException());
+			emitter.onNext("4");
 		});
 		a.onErrorReturn(error -> "");
 		a.subscribe(this::log); // nie pojawi się 4
